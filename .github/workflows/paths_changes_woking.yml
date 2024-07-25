@@ -10,6 +10,10 @@ permissions:
 jobs:
   changes:
     runs-on: ubuntu-latest
+    outputs:
+      folder1: ${{ steps.changes.outputs.folder1 }}
+      folder2: ${{ steps.changes.outputs.folder2 }}
+      folder3: ${{ steps.changes.outputs.folder3 }}
     steps:
       - uses: actions/checkout@v3
       - uses: dorny/paths-filter@v3
