@@ -9,6 +9,10 @@ permissions:
   pull-requests: write
 jobs:
   changes:
+    outputs:
+      folder1: ${{ steps.changes.outputs.folder1 }}
+      folder2: ${{ steps.changes.outputs.folder2 }}
+      folder3: ${{ steps.changes.outputs.folder3 }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
