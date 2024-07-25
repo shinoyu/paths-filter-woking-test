@@ -26,28 +26,25 @@ jobs:
               - 'folder-2/**'
             folder3:
               - 'folder-3/**'
-  echo1:
+  print1:
     needs: changes
     if: needs.changes.outputs.folder1 == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: echo1
-        run: echo "folder-1/docs.md"
-  echo2:
+      - run: cat ./folder-1/docs.md"
+  print2:
     needs: changes
     if: needs.changes.outputs.folder2 == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: echo2
-        run: echo "folder-2/docs.md"
+      - run: cat ./folder-2/docs.md
 
-  echo3:
+  print3:
     needs: changes
     if: needs.changes.outputs.folder3 == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: echo3
-        run: echo "folder-3/docs.md"
+      - run: cat ./folder-3/docs.md
