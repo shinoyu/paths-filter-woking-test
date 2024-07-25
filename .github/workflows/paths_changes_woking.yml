@@ -4,8 +4,7 @@ on:
     branches:
       - main
   pull_request:
-    types:
-      - ready_for_review
+    types: [ready_for_review]
     branches:
       - main
 
@@ -13,7 +12,14 @@ permissions:
   contents: read
   pull-requests: write
 jobs:
+  runnable:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - run: echo "runnable! not a draft PR"
+
   changes:
+    needs: runnable
     outputs:
       folder1: ${{ steps.changes.outputs.folder1 }}
       folder2: ${{ steps.changes.outputs.folder2 }}
