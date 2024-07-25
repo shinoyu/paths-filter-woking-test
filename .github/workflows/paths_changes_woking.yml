@@ -17,11 +17,11 @@ jobs:
         with:
           filters: |
             folder1: 
-              - 'folder-1/**/*'
+              - 'folder-1/**/'
             folder2:
-              - 'folder-2/**/*'
+              - 'folder-2/**/'
             folder3:
-              - 'folder-3/**/*'
+              - 'folder-3/**/'
   echo1:
     needs: changes
     if: needs.changes.outputs.folder1 == 'true'
