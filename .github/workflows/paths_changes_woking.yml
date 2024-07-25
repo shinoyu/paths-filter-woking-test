@@ -24,7 +24,7 @@ jobs:
               - 'folder-3/**'
   echo1:
     needs: changes
-    if: steps.changes.outputs.folder1 == 'true'
+    if: ${{ steps.changes.outputs.folder1 == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
         run: echo "folder-1/docs.md"
   echo2:
     needs: changes
-    if: steps.changes.outputs.folder2 == 'true'
+    if: ${{ steps.changes.outputs.folder2 == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -41,7 +41,7 @@ jobs:
 
   echo3:
     needs: changes
-    if: steps.changes.outputs.folder3 == 'true'
+    if: ${{ steps.changes.outputs.folder3 == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
