@@ -16,7 +16,7 @@ permissions:
   contents: read
   pull-requests: write
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}-workflow3
   cancel-in-progress: true
 jobs:
   fetch-branch:
