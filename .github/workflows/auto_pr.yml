@@ -34,23 +34,26 @@ jobs:
   workflow1:
     runs-on: ubuntu-latest
     needs: [create_merge_pr]
-    uses: ./.github/workflows/workflow1.yml
-    with:
-      target_branch: ${{ needs.create_merge_pr.outputs.branch }}
+    steps:
+      - uses: ./.github/workflows/workflow1.yml
+        with:
+          target_branch: ${{ needs.create_merge_pr.outputs.branch }}
 
   workflow2:
     runs-on: ubuntu-latest
     needs: [create_merge_pr]
-    uses: ./.github/workflows/workflow2.yml
-    with:
-      target_branch: ${{ needs.create_merge_pr.outputs.branch }}
+    steps:
+      - uses: ./.github/workflows/workflow2.yml
+        with:
+          target_branch: ${{ needs.create_merge_pr.outputs.branch }}
 
   workflow3:
     runs-on: ubuntu-latest
     needs: [create_merge_pr]
-    uses: ./.github/workflows/workflow3.yml
-    with:
-      target_branch: ${{ needs.create_merge_pr.outputs.branch }}
+    steps:
+      - uses: ./.github/workflows/workflow3.yml
+        with:
+          target_branch: ${{ needs.create_merge_pr.outputs.branch }}
 
   apply_mergeable_label:
     runs-on: ubuntu-latest
