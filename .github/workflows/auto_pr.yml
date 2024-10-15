@@ -16,6 +16,9 @@ jobs:
       pull-request-number: ${{ steps.merge_request.outputs.pull-request-number }}
       branch: ${{ steps.merge_request.outputs.pull-request-branch  }}
     steps:
+      - name: current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Checkout
         uses: actions/checkout@v4
         with:
