@@ -25,7 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.target_branch }}
+          ref: ${{ inputs.target_branch }}
   job1:
     timeout-minutes: 10
     needs: [fetch-branch]
@@ -34,4 +34,4 @@ jobs:
       - name: wait for a random time
         run: |
           sleep $((RANDOM % 30))
-          echo ${{ github.event.inputs.target_branch }} action
+          echo ${{ inputs.target_branch }} action
