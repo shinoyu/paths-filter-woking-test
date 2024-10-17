@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [labeled]
     branches:
-      - auto-update/auto-pr-branch-*
+      - auto-pr-branch
   workflow_dispatch:
 
 jobs:
