@@ -37,6 +37,13 @@ jobs:
           committer: GitHub Action <action@github.com>
           commit-message: |
             diff ${{ steps.date.outputs.date }}
+  check_branch_name:
+    runs-on: ubuntu-latest
+    needs: [create_merge_pr]
+    steps:
+      - name: Check branch name
+        run: |
+          echo "branch name: ${{ needs.create_merge_pr.outputs.branch }}"
   workflow1:
     needs: [create_merge_pr]
     uses: ./.github/workflows/workflow1.yml
@@ -64,7 +71,7 @@ jobs:
       - name: Add label
         run: gh pr edit ${{ needs.create_merge_pr.outputs.pull-request-number }} --add-label auto-mergeable
         env:
-          GH_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   apply_failed_label:
     runs-on: ubuntu-latest
@@ -75,4 +82,4 @@ jobs:
       - name: Add failed label
         run: gh pr edit ${{ needs.create_merge_pr.outputs.pull-request-number }} --add-label CIエラー対応待ち
         env:
-          GH_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
