@@ -1,0 +1,24 @@
+name: auto_pr_approver
+
+on:
+  pull_request:
+    types: [labeled, synchronize]
+    branches:
+      - auto-pr-branch
+  workflow_dispatch:
+
+jobs:
+  auto_merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    if: >-
+      github.event.action == 'labeled' &&
+      github.event.label.name == 'ci-passed' &&
+      github.event.pull_request.user.login == 'github-actions[bot]'
+    steps:
+      - name: Review
+        uses: hmarr/auto-approve-action@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

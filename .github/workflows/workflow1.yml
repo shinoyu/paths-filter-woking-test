@@ -1,0 +1,52 @@
+name: workflow1
+on:
+  pull_request:
+    types: [opened, ready_for_review, synchronize]
+    branches:
+      - main
+      - auto-pr-branch
+  workflow_call:
+    inputs:
+      target_branch:
+        description: "target branch"
+        required: false
+        type: string
+        default: ""
+permissions:
+  contents: read
+  pull-requests: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-workflow1
+  cancel-in-progress: true
+jobs:
+  echo-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo branch
+        run: echo ${{ inputs.target_branch }}
+  fetch-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch }}
+  job1:
+    timeout-minutes: 10
+    needs: [fetch-branch]
+    runs-on: ubuntu-latest
+    steps:
+      - name: wait for a random time
+        run: |
+          sleep $((RANDOM % 10))
+          echo ${{ inputs.target_branch }} action
+
+  job2:
+    timeout-minutes: 10
+    needs: [fetch-branch]
+    runs-on: ubuntu-latest
+    steps:
+      - name: wait for a random time
+        run: |
+          sleep $((RANDOM % 10))
+          echo ${{ inputs.target_branch }} action2
