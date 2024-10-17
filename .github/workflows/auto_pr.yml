@@ -23,16 +23,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: auto-pr-branch
-      - name: fetch head
+      - name: switch to main HEAD
         run: |
-          git fetch origin main
+          git fetch origin main:main
           git reset --hard main
       - name: Create Merge Pull Request
         id: merge_request
         uses: peter-evans/create-pull-request@v7
         with:
           title: pr (${{ steps.date.outputs.date }})
-          base: auto-pr-branch
           branch: "update/${{ steps.date.outputs.date }}"
           author: GitHub Action <action@github.com>
           committer: GitHub Action <action@github.com>
