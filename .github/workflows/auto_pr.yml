@@ -79,6 +79,8 @@ jobs:
     if: >-
       needs.workflow1.result == 'failure' || needs.workflow2.result == 'failure' || needs.workflow3.result == 'failure'
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Add failed label
         run: gh pr edit ${{ needs.create_merge_pr.outputs.pull-request-number }} --add-label CIエラー対応待ち
         env:
