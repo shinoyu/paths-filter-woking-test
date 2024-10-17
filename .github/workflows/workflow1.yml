@@ -19,6 +19,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-workflow1
   cancel-in-progress: true
 jobs:
+  echo-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo branch
+        run: echo ${{ github.event.inputs.target_branch }}
   fetch-branch:
     runs-on: ubuntu-latest
     steps:
