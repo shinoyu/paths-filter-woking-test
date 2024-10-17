@@ -35,8 +35,9 @@ jobs:
           branch: "update/${{ steps.date.outputs.date }}"
           author: GitHub Action <action@github.com>
           committer: GitHub Action <action@github.com>
-          commit-message: |
-            diff ${{ steps.date.outputs.date }}
+          body: |
+            This is an auto-generated PR.
+            main -> auto-pr-branch
   check_branch_name:
     runs-on: ubuntu-latest
     needs: [create_merge_pr]
@@ -77,4 +78,4 @@ jobs:
       - name: Add failed label
         if: >-
           needs.workflow1.result == 'failure' || needs.workflow2.result == 'failure' || needs.workflow3.result == 'failure'
-        run: gh pr edit ${{ needs.create_merge_pr.outputs.pull-request-number }} --add-label CIエラー対応待ち
+        run: gh pr edit ${{ needs.create_merge_pr.outputs.pull-request-number }} --add-label ci-failed
