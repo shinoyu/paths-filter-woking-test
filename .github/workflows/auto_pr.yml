@@ -22,7 +22,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: auto-pr-branch
+      - name: fetch head
+        run: |
+          git fetch origin main
+          git reset --hard main
       - name: Create Merge Pull Request
         id: merge_request
         uses: peter-evans/create-pull-request@v7
