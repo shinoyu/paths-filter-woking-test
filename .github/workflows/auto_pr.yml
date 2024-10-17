@@ -32,7 +32,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           title: pr (${{ steps.date.outputs.date }})
-          branch: "update/${{ steps.date.outputs.date }}"
+          branch: "auto-update/auto-pr-branch-${{ steps.date.outputs.date }}"
           author: GitHub Action <action@github.com>
           committer: GitHub Action <action@github.com>
           body: |
@@ -74,7 +74,7 @@ jobs:
       - name: Add success label
         if: >-
           needs.workflow1.result == 'success' && needs.workflow2.result == 'success' && needs.workflow3.result == 'success'
-        run: gh pr edit ${{ needs.create_merge_pr.outputs.pull-request-number }} --add-label auto-mergeable
+        run: gh pr edit ${{ needs.create_merge_pr.outputs.pull-request-number }} --add-label ci-passed
       - name: Add failed label
         if: >-
           needs.workflow1.result == 'failure' || needs.workflow2.result == 'failure' || needs.workflow3.result == 'failure'

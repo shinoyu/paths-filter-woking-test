@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [labeled]
     branches:
-      - "update/**"
+      - auto-update/auto-pr-branch-*
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     permissions:
       pull-requests: write
     if: >-
-      github.event.label.name == 'auto-mergeable' &&
+      github.event.label.name == 'ci-passed' &&
       github.event.pull_request.user.login == 'github-actions[bot]'
     steps:
       - name: Review
